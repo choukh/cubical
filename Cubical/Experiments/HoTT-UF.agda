@@ -16,44 +16,41 @@ For the moment, this requires the development version of Agda.
 module Cubical.Experiments.HoTT-UF where
 
 open import Cubical.Core.Primitives hiding ( _≡_ )
-open import Cubical.Core.Id public
+  renaming ( fst to pr₁ ; snd to pr₂ )
 
-open import Cubical.Foundations.Id public
-     using ( _≡_            -- The identity type.
-           ; refl           -- Unfortunately, pattern matching on refl is not available.
-           ; J              -- Until it is, you have to use the induction principle J.
+open import Cubical.Data.Equality using
+  ( _≡_            -- The identity type.
+  ; refl           -- Pattern matching on refl is available.
+  ; J              -- You can also use the induction principle J.
 
-           ; transport      -- As in the HoTT Book.
-           ; ap
-           ; _∙_
-           ; _⁻¹
+  ; transport      -- As in the HoTT Book.
+  ; ap
+  ; _∙_
 
-           ; _≡⟨_⟩_         -- Standard equational reasoning.
-           ; _∎
+  ; _≡⟨_⟩_         -- Standard equational reasoning.
+  ; _∎
 
-           ; funExt         -- Function extensionality
-                            -- (can also be derived from univalence).
+  ; funExt         -- Function extensionality
+                  -- (can also be derived from univalence).
 
-           ; Σ              -- Sum type. Needed to define contractible types, equivalences
-           ; _,_            -- and univalence.
-           ; pr₁            -- The eta rule is available.
-           ; pr₂
+  ; isProp         -- The usual notions of proposition, contractible type, set.
+  ; isContr
+  ; isSet
 
-           ; isProp         -- The usual notions of proposition, contractible type, set.
-           ; isContr
-           ; isSet
+  ; isEquiv        -- A map with contractible fibers
+                  -- (Voevodsky's version of the notion).
+  ; _≃_           -- The type of equivalences between two given types.
+  ; univalenceEq  -- A formulation of univalence.
 
-           ; isEquiv        -- A map with contractible fibers
-                            -- (Voevodsky's version of the notion).
-           ; _≃_            -- The type of equivalences between two given types.
-           ; EquivContr     -- A formulation of univalence.
-
-           ; ∥_∥₁            -- Propositional truncation.
-           ; ∣_∣₁             -- Map into the propositional truncation.
-           ; ∥∥-isProp       -- A truncated type is a proposition.
-           ; ∥∥-recursion    -- Non-dependent elimination.
-           ; ∥∥-induction    -- Dependent elimination.
-           )
+  ; ∥_∥₁            -- Propositional truncation.
+  ; ∣_∣₁             -- Map into the propositional truncation.
+  ; ∥∥-isProp       -- A truncated type is a proposition.
+  ; ∥∥-recursion    -- Non-dependent elimination.
+  ; ∥∥-induction    -- Dependent elimination.
+  )
+  renaming
+  ( sym to _⁻¹ )
+  public
 
 {-
 

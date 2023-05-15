@@ -76,6 +76,14 @@ apd f refl = refl
 congPathd : {C : A → Type ℓ} (f : (x : A) → C x) {x y : A} (p : Path A x y) → Path (C y) (substPath C p (f x)) (f y)
 congPathd f p = fromPathP (congPath f p)
 
+module _ {x : A} (P : ∀ (y : A) → x ≡ y → Type ℓ') (d : P x refl) where
+  J : ∀ {y : A} (w : x ≡ y) → P y w
+  J {y = y} refl = d
+
+  -- Check that J of refl is the identity function
+  Jdefeq : Path _ (J refl) d
+  Jdefeq _ = d
+
 -- Equality between Path and equality
 eqToPath : {x y : A} → x ≡ y → Path A x y
 eqToPath refl = reflPath
